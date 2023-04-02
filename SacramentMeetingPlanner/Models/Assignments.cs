@@ -9,7 +9,7 @@ namespace SacramentMeetingPlanner.Models
     }
     public class Assignments
     {        
-        public int AssignmentID { get; set; }
+        public int AssignmentsID { get; set; }
         public int MeetingID { get; set; }
         public int SpeakerID { get; set; }
         public Conducting? Conducting { get; set; }
