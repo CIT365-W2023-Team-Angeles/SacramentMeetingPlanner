@@ -31,20 +31,15 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyMeeting = new Meeting();
-
-            if (await TryUpdateModelAsync<Meeting>(
-                emptyMeeting,
-                "meeting",   // Prefix for form value.
-                s => s.MeetingDate, s => s.Conducting, s => s.NumSpeakers))
+          if (!ModelState.IsValid)
             {
-                _context.Meetings.Add(emptyMeeting);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                return Page();
             }
 
-            return Page();
-        }
+            _context.Meetings.Add(Meeting);
+            await _context.SaveChangesAsync();
 
+            return RedirectToPage("./Index");
+        }
     }
 }
