@@ -29,6 +29,28 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Meeting.NumSpeakers)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meeting.Assignments)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Speaker</th>
+                    <th>Topic</th>
+                </tr>
+                @foreach (var item in Model.Meeting.Assignments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Speaker.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Speaker.Topic)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>

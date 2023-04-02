@@ -10,5 +10,6 @@ namespace SacramentMeetingPlanner.Models
         public int NumSpeakers { get; set; }
 
         public ICollection<Assignments> Assignments { get; set; }
+        public ICollection<Selection> Selection { get; set; }
     }
 }

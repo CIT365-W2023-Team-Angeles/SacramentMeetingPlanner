@@ -28,15 +28,22 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return NotFound();
             }
 
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
-            if (meeting == null)
+            Meeting = await _context.Meetings
+                .Include(s => s.Assignments)
+                .ThenInclude(e => e.Speaker)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.MeetingID == id);
+
+            //var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
+
+            if (Meeting == null)
             {
                 return NotFound();
             }
-            else 
-            {
-                Meeting = meeting;
-            }
+            //else 
+            //{
+            //    Meeting = meeting;
+            //}
             return Page();
         }
     }
