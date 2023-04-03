@@ -66,6 +66,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
 
             return Page();
         }
+
         private bool MeetingExists(int id)
         {
           return _context.Meetings.Any(e => e.MeetingID == id);
