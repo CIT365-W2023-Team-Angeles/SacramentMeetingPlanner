@@ -12,7 +12,7 @@ namespace SacramentMeetingPlanner.Models
         public int AssignmentsID { get; set; }
         public int MeetingID { get; set; }
         public int SpeakerID { get; set; }
-        public Conducting? Conducting { get; set; }
+        public string Topic { get; set; }
 
         public Meeting Meeting { get; set; }
         public Speaker Speaker { get; set; }

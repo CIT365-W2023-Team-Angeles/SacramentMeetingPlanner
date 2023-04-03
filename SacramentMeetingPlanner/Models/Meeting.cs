@@ -6,7 +6,7 @@ namespace SacramentMeetingPlanner.Models
     {
         public int MeetingID { get; set; }
         public DateTime MeetingDate { get; set; }
-        public string Conducting { get; set; }
+        public Enum Conducting { get; set; }
         public int NumSpeakers { get; set; }
 
         public ICollection<Assignments> Assignments { get; set; }
