@@ -20,55 +20,52 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
+
         [BindProperty]
         public Meeting Meeting { get; set; } = default!;
+        public List<SelectListItem> ConductingList { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var meeting =  await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
-            if (meeting == null)
+            Meeting = await _context.Meetings.FindAsync(id);
+
+            if (Meeting == null)
             {
                 return NotFound();
             }
-            Meeting = meeting;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            var meetingToUpdate = await _context.Meetings.FindAsync(id);
+
+            if (meetingToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Meeting).State = EntityState.Modified;
-
-            try
+            if (await TryUpdateModelAsync<Meeting>(
+                meetingToUpdate,
+                "meeting",
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
             {
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
+
             {
-                if (!MeetingExists(Meeting.MeetingID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
+                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
-
         private bool MeetingExists(int id)
         {
           return _context.Meetings.Any(e => e.MeetingID == id);

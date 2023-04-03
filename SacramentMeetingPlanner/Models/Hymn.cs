@@ -8,6 +8,6 @@ namespace SacramentMeetingPlanner.Models
         public string Title { get; set; }
         public int Number { get; set; }
 
-        public ICollection<Assignments> Assignments { get; set; }
+        public ICollection<Selection> Selections { get; set; }
     }
 }

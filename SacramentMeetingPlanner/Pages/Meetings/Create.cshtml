@@ -20,11 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.Conducting" class="control-label"></label>
-                <select asp-for="Meeting.Conducting" name="conducting" class="form-control">
+@*                <select asp-for="Meeting.Conducting" name="conducting" class="form-control">
                     <option value="Bishop">Bishop Clifford Duke</option>
                     <option value="Counselor1">Ethan Arredando, 1st Counselor</option>
                     <option value="Counselor2">Jim Elliot, 2nd Counselor</option>
-                </select>
+                </select>*@
+                <select asp-for="Meeting.Conducting" asp-items="@Model.ConductingList"></select>
                 <span asp-validation-for="Meeting.Conducting" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -66,7 +67,7 @@
                 <button type="button" class="btn btn-sm btn-success" id="addspeaker" onclick="AddTextBox();  this.disabled=true;"><i class="fa fa-angle-right"></i> Add Speaker</button>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

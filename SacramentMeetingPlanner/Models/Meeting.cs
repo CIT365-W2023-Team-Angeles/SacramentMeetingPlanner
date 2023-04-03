@@ -11,9 +11,9 @@ namespace SacramentMeetingPlanner.Models
         [Display(Name = "Meeting Date")]
         [Required(ErrorMessage = "Enter a Date")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MeetingDate { get; set; }
 
-        [Required(ErrorMessage = "Select a Conductor")]
         public string Conducting { get; set; }
 
         [Display(Name = "Opening Hymn")]

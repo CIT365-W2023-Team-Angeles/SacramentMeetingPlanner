@@ -43,13 +43,13 @@ namespace SacramentMeetingPlanner.Data
 
             var meetings = new Meeting[]
             {
-                new Meeting{MeetingDate=DateTime.Parse("2023-02-26"),Conducting="Bishop Clifford Duke", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-03-5"),Conducting="Ethan Arredando, 1st Counselor", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-03-12"),Conducting="Jim Elliot, 2nd Counselor", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-03-19"),Conducting="Bishop Clifford Duke", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-03-26"),Conducting="Ethan Arredando, 1st Counselor", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-04-9"),Conducting="Jim Elliot, 2nd Counselor", NumSpeakers=3},
-                new Meeting{MeetingDate=DateTime.Parse("2023-04-16"),Conducting="Bishop Clifford Duke", NumSpeakers=3}
+                new Meeting{MeetingDate=DateTime.Parse("2023-02-26"),Conducting="Bishop Clifford Duke",OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-03-5"),Conducting="Ethan Arredando, 1st Counselor", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-03-12"),Conducting="Jim Elliot, 2nd Counselor", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-03-19"),Conducting="Bishop Clifford Duke", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-03-26"),Conducting="Ethan Arredando, 1st Counselor", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-04-9"),Conducting="Jim Elliot, 2nd Counselor", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3},
+                new Meeting{MeetingDate=DateTime.Parse("2023-04-16"),Conducting="Bishop Clifford Duke", OpeningHymn="The Spirit of God 2", Invocation="Elizabeth Davison",SacramentHymn="As Now We Take the Sacrament 169",ClosingHymn="Come Follow Me 116", NumSpeakers=3}
             };
 
             context.Meetings.AddRange(meetings);
@@ -161,33 +161,33 @@ namespace SacramentMeetingPlanner.Data
             context.Hymns.AddRange(hymns);
             context.SaveChanges();
 
-            var selections = new Selection[]
-            {
-                new Selection{HymnID=1,MeetingID=1},
-                new Selection{HymnID=2,MeetingID=1},
-                new Selection{HymnID=3,MeetingID=1},
-                new Selection{HymnID=4,MeetingID=2},
-                new Selection{HymnID=5,MeetingID=2},
-                new Selection{HymnID=6,MeetingID=2},
-                new Selection{HymnID=7,MeetingID=3},
-                new Selection{HymnID=8,MeetingID=3},
-                new Selection{HymnID=9,MeetingID=3},
-                new Selection{HymnID=10,MeetingID=4},
-                new Selection{HymnID=11,MeetingID=4},
-                new Selection{HymnID=12,MeetingID=4},
-                new Selection{HymnID=13,MeetingID=5},
-                new Selection{HymnID=14,MeetingID=5},
-                new Selection{HymnID=15,MeetingID=5},
-                new Selection{HymnID=16,MeetingID=6},
-                new Selection{HymnID=17,MeetingID=6},
-                new Selection{HymnID=18,MeetingID=6},
-                new Selection{HymnID=19,MeetingID=7},
-                new Selection{HymnID=20,MeetingID=7},
-                new Selection{HymnID=21,MeetingID=7}
-            };
+            //var selections = new Selection[]
+            //{
+            //    new Selection{HymnID=1,MeetingID=1},
+            //    new Selection{HymnID=2,MeetingID=1},
+            //    new Selection{HymnID=3,MeetingID=1},
+            //    new Selection{HymnID=4,MeetingID=2},
+            //    new Selection{HymnID=5,MeetingID=2},
+            //    new Selection{HymnID=6,MeetingID=2},
+            //    new Selection{HymnID=7,MeetingID=3},
+            //    new Selection{HymnID=8,MeetingID=3},
+            //    new Selection{HymnID=9,MeetingID=3},
+            //    new Selection{HymnID=10,MeetingID=4},
+            //    new Selection{HymnID=11,MeetingID=4},
+            //    new Selection{HymnID=12,MeetingID=4},
+            //    new Selection{HymnID=13,MeetingID=5},
+            //    new Selection{HymnID=14,MeetingID=5},
+            //    new Selection{HymnID=15,MeetingID=5},
+            //    new Selection{HymnID=16,MeetingID=6},
+            //    new Selection{HymnID=17,MeetingID=6},
+            //    new Selection{HymnID=18,MeetingID=6},
+            //    new Selection{HymnID=19,MeetingID=7},
+            //    new Selection{HymnID=20,MeetingID=7},
+            //    new Selection{HymnID=21,MeetingID=7}
+            //};
 
-            context.Selections.AddRange(selections);
-            context.SaveChanges();
+            //context.Selections.AddRange(selections);
+            //context.SaveChanges();
         }
     }
 }
