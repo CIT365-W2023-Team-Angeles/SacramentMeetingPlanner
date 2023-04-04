@@ -18,12 +18,12 @@ namespace SacramentMeetingPlanner.Data
         public DbSet<Assignments> Assignments { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Hymn> Hymns { get; set; }
-        public DbSet<Selection> Selections { get; set; }
+        //public DbSet<Selection> Selections { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Selection>().ToTable("Selections");
+            //modelBuilder.Entity<Selection>().ToTable("Selections");
             modelBuilder.Entity<Hymn>().ToTable("Hymns");
             modelBuilder.Entity<Meeting>().ToTable("Meetings");
             modelBuilder.Entity<Assignments>().ToTable("Assignments");

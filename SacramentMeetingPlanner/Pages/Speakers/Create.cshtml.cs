@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class CreateModel : PageModel
     {
@@ -19,21 +19,13 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
-        public List<SelectListItem> HymnList { get; set; }
-
         public IActionResult OnGet()
         {
-            HymnList = _context.Hymns.Select(a => new SelectListItem
-            {
-                Value = a.DisplayName,
-                Text = a.DisplayName
-            }).ToList().OrderBy(a => Int32.Parse(a.Value.Split(" - ")[0])).ToList();
-            
             return Page();
         }
 
         [BindProperty]
-        public Meeting Meeting { get; set; }
+        public Speaker Speaker { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -44,7 +36,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            _context.Meetings.Add(Meeting);
+            _context.Speakers.Add(Speaker);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -20,18 +20,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.Conducting" class="control-label"></label>
-@*                <select asp-for="Meeting.Conducting" name="conducting" class="form-control">
-                    <option value="Bishop">Bishop Clifford Duke</option>
-                    <option value="Counselor1">Ethan Arredando, 1st Counselor</option>
-                    <option value="Counselor2">Jim Elliot, 2nd Counselor</option>
-                </select>*@
-                <select asp-for="Meeting.Conducting" asp-items="@Model.ConductingList"></select>
+                <input asp-for="Meeting.Conducting" class="form-control" />
                 <span asp-validation-for="Meeting.Conducting" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
-                <input asp-for="Meeting.OpeningHymn" class="form-control" />
+                <select asp-for="Meeting.OpeningHymn" asp-items="@Model.HymnList">
+                    <option>Select one</option>
+                </select>
                 <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.Invocation" class="control-label"></label>
@@ -40,12 +38,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
-                <input asp-for="Meeting.SacramentHymn" class="form-control" />
+                <select asp-for="Meeting.SacramentHymn" asp-items="@Model.HymnList">
+                    <option>Select one</option>
+                </select>
                 <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
-                <input asp-for="Meeting.ClosingHymn" class="form-control" />
+                <select asp-for="Meeting.ClosingHymn" asp-items="@Model.HymnList">
+                    <option>Select one</option>
+                </select>
                 <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,11 +65,8 @@
                 <input asp-for="Meeting.NumSpeakers" class="form-control" />
                 <span asp-validation-for="Meeting.NumSpeakers" class="text-danger"></span>
             </div>
-            <div id="divcontent" class="form-group">
-                <button type="button" class="btn btn-sm btn-success" id="addspeaker" onclick="AddTextBox();  this.disabled=true;"><i class="fa fa-angle-right"></i> Add Speaker</button>
-            </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -76,20 +75,6 @@
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
-
-<script type="text/javascript">
-    function GetDynamicTextBox(value) {
-        return ('<hr><label class="control-label">Name</label><input name="Name" id="Name"class="form-control" required><br><label class="control-label">Topic</label><input name="Topic" id="Topic" class="form-control" required><br><button type="button" class="btn btn-sm btn-danger" onclick="RemoveTextBox(this); document.getElementById(\'addspeaker\').disabled=false;"><i class="fa fa-angle-right"></i> Remove Speaker</button>');
-    }
-    function AddTextBox() {
-        var div = document.createElement('DIV');
-        div.innerHTML = GetDynamicTextBox("");
-        document.getElementById("divcontent").appendChild(div);
-    }
-    function RemoveTextBox(div) {
-        document.getElementById("divcontent").removeChild(div.parentNode);
-    }
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

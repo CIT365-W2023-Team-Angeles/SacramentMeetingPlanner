@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class EditModel : PageModel
     {
@@ -21,29 +21,21 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         }
 
         [BindProperty]
-        public Meeting Meeting { get; set; } = default!;
-        public List<SelectListItem> HymnList { get; set; }
+        public Speaker Speaker { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null || _context.Speakers == null)
             {
                 return NotFound();
             }
 
-            var meeting =  await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
-            if (meeting == null)
+            var speaker =  await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
+            if (speaker == null)
             {
                 return NotFound();
             }
-            Meeting = meeting;
-
-            HymnList = _context.Hymns.Select(a => new SelectListItem
-            {
-                Value = $"{a.Number}: {a.Title}",
-                Text = $"{a.Number}: {a.Title}"
-            }).ToList().OrderBy(a => Int32.Parse(a.Value.Split(" - ")[0])).ToList();
-
+            Speaker = speaker;
             return Page();
         }
 
@@ -56,7 +48,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            _context.Attach(Meeting).State = EntityState.Modified;
+            _context.Attach(Speaker).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +56,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MeetingExists(Meeting.MeetingID))
+                if (!SpeakerExists(Speaker.SpeakerID))
                 {
                     return NotFound();
                 }
@@ -77,9 +69,9 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             return RedirectToPage("./Index");
         }
 
-        private bool MeetingExists(int id)
+        private bool SpeakerExists(int id)
         {
-          return _context.Meetings.Any(e => e.MeetingID == id);
+          return _context.Speakers.Any(e => e.SpeakerID == id);
         }
     }
 }

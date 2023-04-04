@@ -9,5 +9,14 @@ namespace SacramentMeetingPlanner.Models
         public int Number { get; set; }
 
         public ICollection<Selection> Selections { get; set; }
+
+        public string DisplayName
+        {
+            get
+            {
+                return $"{Number} - {Title}";
+            }
+        }
     }
+
 }

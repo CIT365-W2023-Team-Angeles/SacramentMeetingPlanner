@@ -8,86 +8,77 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Meeting</h4>
+    <h5>Meeting</h5>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.MeetingDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.MeetingDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.Conducting)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.Conducting)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.OpeningHymn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.OpeningHymn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.Invocation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.Invocation)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.SacramentHymn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.SacramentHymn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.ClosingHymn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.ClosingHymn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.Benediction)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.Benediction)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.Notes)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.Notes)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.NumSpeakers)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Meeting.NumSpeakers)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Meeting.Assignments)
-        </dt>
-        <dd class="col-sm-10">
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Topic</th>
-                </tr>
-                @foreach (var item in Model.Meeting.Assignments)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Speaker.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Speaker.Topic)
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
-    </dl>
+
+    <div class="container">
+        <div class="row text-center"><h3>White Oak Ward</h3></div>
+        <div class="row text-center"><h4>@Html.DisplayFor(model => model.Meeting.MeetingDate)</h4></div>
+
+        <div class="row">
+            <div class="col-6"><h5>Presiding:</h5></div>
+            <div class="col-6 text-end">Bishop Clifford Duke</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.Conducting):</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.Conducting)</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.OpeningHymn)</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.OpeningHymn)</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.Invocation):</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.Invocation)</div>
+        </div>
+
+        <div class="row text-center">
+            <em>Ward Business</em>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.SacramentHymn)</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.SacramentHymn)</div>
+        </div>
+
+        <div class="row text-center">
+            <em>Passing of the Sacrament by the Aaronic Priesthood</em>
+        </div>
+
+        @foreach
+
+        <div class="row">
+            <div class="col-6"><h5>Speaker 1</h5></div>
+            <div class="col-6 text-end">Speaker 1 Topic</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>Speaker 2</h5></div>
+            <div class="col-6 text-end">Speaker 2 Topic</div>
+        </div>
+
+        <div class="row text-center"><em>Special Musical Number<br />Person doing the musical number</em></div>
+
+        <div class="row">
+            <div class="col-6"><h5>Speaker 3</h5></div>
+            <div class="col-6 text-end">Speaker 3 Topic</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.ClosingHymn)</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.ClosingHymn)</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6"><h5>@Html.DisplayNameFor(model => model.Meeting.Benediction):</h5></div>
+            <div class="col-6 text-end">@Html.DisplayFor(model => model.Meeting.Benediction)</div>
+        </div>
+ 
+    </div>
+
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Meeting?.MeetingID">Edit</a> |

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
-      public Meeting Meeting { get; set; }
+      public Speaker Speaker { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null || _context.Speakers == null)
             {
                 return NotFound();
             }
 
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
-            if (meeting == null)
+            var speaker = await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
+            if (speaker == null)
             {
                 return NotFound();
             }
             else 
             {
-                Meeting = meeting;
+                Speaker = speaker;
             }
             return Page();
         }

@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SacramentMeetingPlanner.Migrations;
 
 namespace SacramentMeetingPlanner.Models
 {
@@ -39,12 +41,6 @@ namespace SacramentMeetingPlanner.Models
         public string Notes { get; set; }
 
         public int NumSpeakers { get; set; }
-
-        [Display(Name = "Speaking Assignment")]
-        public ICollection<Assignments> Assignments { get; set; }
         public ICollection<Speaker> Speakers { get; set; }
-
-        [Display(Name = "Hymn Selection")]
-        public ICollection<Selection> Selection { get; set; }
     }
 }
