@@ -43,5 +43,7 @@ namespace SacramentMeetingPlanner.Models
 
         [Display(Name = "Hymn Selection")]
         public ICollection<Selection> Selection { get; set; }
+
+        public ICollection<Assignments> Assignments { get; set; }
     }
 }

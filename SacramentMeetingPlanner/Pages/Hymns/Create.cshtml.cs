@@ -19,8 +19,17 @@ namespace SacramentMeetingPlanner.Pages.Hymns
             _context = context;
         }
 
+        public List<SelectListItem> HymnList { get; set; }
+
         public IActionResult OnGet()
         {
+
+            HymnList = _context.Hymns.Select(a => new SelectListItem
+            {
+                Value = a.DisplayName,
+                Text = a.DisplayName
+            }).ToList().OrderBy(a => Int32.Parse(a.Value.Split(" - ")[0])).ToList();
+
             return Page();
         }
 

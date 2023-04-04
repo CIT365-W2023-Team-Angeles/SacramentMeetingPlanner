@@ -34,6 +34,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
 
         [BindProperty]
         public Meeting Meeting { get; set; }
+        public Meeting emptyMeeting { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
