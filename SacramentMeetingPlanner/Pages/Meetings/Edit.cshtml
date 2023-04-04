@@ -70,7 +70,7 @@
                         <th>Name</th>
                         <th>Topic</th>
                     </tr>
-                    @foreach (var item in Model.Meeting.Assignments)
+                    @foreach (var item in Model.Assignments)
                     {
                         <tr>
                             <td>
@@ -78,6 +78,11 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Speaker.Topic)
+                            </td>
+                            <td>
+                                <a asp-controller="Speakers" asp-action="Edit" asp-route-id="@item.SpeakerID">Edit Name</a> |
+                                <a asp-controller="Assignments" asp-action="Edit" asp-route-id="@item.AssignmentsID">Edit Topic</a> |
+                                <a asp-controller="Assignments" asp-action="Delete" asp-route-id="@item.AssignmentsID">Delete</a>
                             </td>
                         </tr>
                     }

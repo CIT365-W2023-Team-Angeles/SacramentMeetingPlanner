@@ -2,22 +2,38 @@
 @model SacramentMeetingPlanner.Pages.Meetings.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "White Oak Ward Meetings";
 }
 
-<h1>Index</h1>
+<h1>White Oak Ward Meetings</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+        </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].MeetingDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Meeting[0].MeetingDate)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].Conducting)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Meeting[0].Conducting)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Meeting[0].NumSpeakers)
