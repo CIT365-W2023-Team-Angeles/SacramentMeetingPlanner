@@ -66,7 +66,30 @@
                 <span asp-validation-for="Meeting.NumSpeakers" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Topic</th>
+                    </tr>
+                    @foreach (var item in Model.Meeting.Assignments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Speaker.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Speaker.Topic)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+                
+            <div id="divcontent" class="form-group">
+                <button type="button" class="btn btn-sm btn-success" id="addspeaker" onclick="AddTextBox();  this.disabled=true;"><i class="fa fa-angle-right"></i> Add Speaker</button>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

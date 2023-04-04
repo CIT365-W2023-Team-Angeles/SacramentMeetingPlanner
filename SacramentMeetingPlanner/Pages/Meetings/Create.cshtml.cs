@@ -44,10 +44,17 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            _context.Meetings.Add(Meeting);
-            await _context.SaveChangesAsync();
+            if (await TryUpdateModelAsync<Meeting>(
+                emptyMeeting,
+                "meeting",   // Prefix for form value.
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
+            {
+                _context.Meetings.Add(emptyMeeting);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }
