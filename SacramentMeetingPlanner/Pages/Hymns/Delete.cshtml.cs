@@ -69,7 +69,7 @@ namespace SacramentMeetingPlanner.Pages.Hymns
 
             try
             {
-                _context.Students.Remove(student);
+                _context.Hymns.Remove(student);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
