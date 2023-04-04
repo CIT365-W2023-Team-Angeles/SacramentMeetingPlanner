@@ -19,29 +19,35 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
+        public List<SelectListItem> HymnList { get; set; }
+
         public IActionResult OnGet()
         {
+            HymnList = _context.Hymns.Select(a => new SelectListItem
             {
-                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
-                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
-            }
+                Value = a.DisplayName,
+                Text = a.DisplayName
+            }).ToList().OrderBy(a => Int32.Parse(a.Value.Split(" - ")[0])).ToList();
+            
             return Page();
         }
 
         [BindProperty]
         public Meeting Meeting { get; set; }
-        public List<SelectListItem> ConductingList { get; set; }
-              
+        
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyMeeting = new Meeting();
+          if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             if (await TryUpdateModelAsync<Meeting>(
                 emptyMeeting,
                 "meeting",   // Prefix for form value.
-                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s => s.Assignments))
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
             {
                 _context.Meetings.Add(emptyMeeting);
                 await _context.SaveChangesAsync();

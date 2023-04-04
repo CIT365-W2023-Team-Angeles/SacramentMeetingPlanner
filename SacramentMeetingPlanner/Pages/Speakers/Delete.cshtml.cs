@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class DeleteModel : PageModel
     {
@@ -20,40 +20,40 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         }
 
         [BindProperty]
-      public Meeting Meeting { get; set; }
+      public Speaker Speaker { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null || _context.Speakers == null)
             {
                 return NotFound();
             }
 
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
+            var speaker = await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
 
-            if (meeting == null)
+            if (speaker == null)
             {
                 return NotFound();
             }
             else 
             {
-                Meeting = meeting;
+                Speaker = speaker;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null || _context.Speakers == null)
             {
                 return NotFound();
             }
-            var meeting = await _context.Meetings.FindAsync(id);
+            var speaker = await _context.Speakers.FindAsync(id);
 
-            if (meeting != null)
+            if (speaker != null)
             {
-                Meeting = meeting;
-                _context.Meetings.Remove(Meeting);
+                Speaker = speaker;
+                _context.Speakers.Remove(Speaker);
                 await _context.SaveChangesAsync();
             }
 

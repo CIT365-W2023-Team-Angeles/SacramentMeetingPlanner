@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.Meetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class EditModel : PageModel
     {
@@ -21,35 +21,21 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         }
 
         [BindProperty]
-        public Meeting Meeting { get; set; } = default!;
-        public List<SelectListItem> HymnList { get; set; }
+        public Speaker Speaker { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Meetings == null)
+            if (id == null || _context.Speakers == null)
             {
                 return NotFound();
             }
 
-            var meeting =  await _context.Meetings.FirstOrDefaultAsync(m => m.MeetingID == id);
-            if (meeting == null)
+            var speaker =  await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
+            if (speaker == null)
             {
                 return NotFound();
             }
-
-            {
-                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
-                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
-            }
-
-            Meeting = meeting;
-
-            HymnList = _context.Hymns.Select(a => new SelectListItem
-            {
-                Value = $"{a.Number}: {a.Title}",
-                Text = $"{a.Number}: {a.Title}"
-            }).ToList().OrderBy(a => Int32.Parse(a.Value.Split(" - ")[0])).ToList();
-
+            Speaker = speaker;
             return Page();
         }
 
@@ -62,16 +48,15 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 return Page();
             }
 
-            if (await TryUpdateModelAsync<Meeting>(
-                meetingToUpdate,
-                "meeting",
-                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s=> s.Assignments))
+            _context.Attach(Speaker).State = EntityState.Modified;
+
+            try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MeetingExists(Meeting.MeetingID))
+                if (!SpeakerExists(Speaker.SpeakerID))
                 {
                     return NotFound();
                 }
@@ -84,9 +69,9 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             return RedirectToPage("./Index");
         }
 
-        private bool MeetingExists(int id)
+        private bool SpeakerExists(int id)
         {
-          return _context.Meetings.Any(e => e.MeetingID == id);
+          return _context.Speakers.Any(e => e.SpeakerID == id);
         }
     }
 }

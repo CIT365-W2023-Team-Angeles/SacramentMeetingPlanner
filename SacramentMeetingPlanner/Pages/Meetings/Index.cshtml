@@ -10,6 +10,7 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<table class="table table-hover">
 
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
@@ -24,7 +25,7 @@
 
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-info">
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
                     @Html.DisplayNameFor(model => model.Meeting[0].MeetingDate)
@@ -36,6 +37,24 @@
                 </a>
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].OpeningHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].Invocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].SacramentHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].ClosingHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].Benediction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].Notes)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Meeting[0].NumSpeakers)
             </th>
             <th></th>
@@ -43,12 +62,30 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Meeting) {
-        <tr>
+        <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.MeetingDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Conducting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningHymn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Invocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SacramentHymn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingHymn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Benediction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumSpeakers)

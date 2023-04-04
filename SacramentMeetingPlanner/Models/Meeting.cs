@@ -39,9 +39,6 @@ namespace SacramentMeetingPlanner.Models
         public string Notes { get; set; }
 
         public int NumSpeakers { get; set; }
-
-        [Display(Name = "Talk Assignment")]
-        public ICollection<Assignments> Assignments { get; set; }
         public ICollection<Speaker> Speakers { get; set; }
 
         [Display(Name = "Hymn Selection")]
