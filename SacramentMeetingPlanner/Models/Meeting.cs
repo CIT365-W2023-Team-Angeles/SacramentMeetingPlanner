@@ -40,7 +40,7 @@ namespace SacramentMeetingPlanner.Models
 
         public int NumSpeakers { get; set; }
 
-        [Display(Name = "Speaking Assignment")]
+        [Display(Name = "Talk Assignment")]
         public ICollection<Assignments> Assignments { get; set; }
         public ICollection<Speaker> Speakers { get; set; }
 

@@ -38,6 +38,12 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             {
                 return NotFound();
             }
+
+            {
+                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
+                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            }
+
             return Page();
         }
 
@@ -53,15 +59,10 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             if (await TryUpdateModelAsync<Meeting>(
                 meetingToUpdate,
                 "meeting",
-                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s=> s.Assignments))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
-            }
-
-            {
-                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
-                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
             }
 
             return Page();

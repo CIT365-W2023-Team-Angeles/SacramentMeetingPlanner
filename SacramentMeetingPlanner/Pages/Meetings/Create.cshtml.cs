@@ -41,7 +41,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             if (await TryUpdateModelAsync<Meeting>(
                 emptyMeeting,
                 "meeting",   // Prefix for form value.
-                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s => s.Assignments))
             {
                 _context.Meetings.Add(emptyMeeting);
                 await _context.SaveChangesAsync();

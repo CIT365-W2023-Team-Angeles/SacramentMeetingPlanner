@@ -30,6 +30,6 @@ namespace SacramentMeetingPlanner.Data
             modelBuilder.Entity<Speaker>().ToTable("Speakers");
         }
 
-        public DbSet<SacramentMeetingPlanner.Models.Hymn> Hymn { get; set; }
+        //public DbSet<SacramentMeetingPlanner.Models.Hymn> Hymn { get; set; }
     }
 }

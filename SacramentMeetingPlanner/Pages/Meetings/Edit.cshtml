@@ -64,13 +64,13 @@
                 <input asp-for="Meeting.NumSpeakers" class="form-control" />
                 <span asp-validation-for="Meeting.NumSpeakers" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <table class="table">
                     <tr>
                         <th>Name</th>
                         <th>Topic</th>
                     </tr>
-                    @foreach (var item in Model.Assignments)
+                    @foreach (var item in Model.Meeting.Assignments)
                     {
                         <tr>
                             <td>
@@ -80,14 +80,14 @@
                                 @Html.DisplayFor(modelItem => item.Speaker.Topic)
                             </td>
                             <td>
-                                <a asp-controller="Speakers" asp-action="Edit" asp-route-id="@item.SpeakerID">Edit Name</a> |
-                                <a asp-controller="Assignments" asp-action="Edit" asp-route-id="@item.AssignmentsID">Edit Topic</a> |
-                                <a asp-controller="Assignments" asp-action="Delete" asp-route-id="@item.AssignmentsID">Delete</a>
+                                <a asp-page="./Edit" asp-route-id="@item.SpeakerID">Edit</a> |
+                                <a asp-page="./Details" asp-route-id="@item.AssignmentsID">Details</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.AssignmentsID">Delete</a>
                             </td>
                         </tr>
                     }
                 </table>
-            </div>
+            </div>*@
                 
             <div id="divcontent" class="form-group">
                 <button type="button" class="btn btn-sm btn-success" id="addspeaker" onclick="AddTextBox();  this.disabled=true;"><i class="fa fa-angle-right"></i> Add Speaker</button>
