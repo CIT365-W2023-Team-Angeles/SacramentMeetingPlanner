@@ -28,15 +28,20 @@ namespace SacramentMeetingPlanner.Pages.Hymns
                 return NotFound();
             }
 
-            var hymn = await _context.Hymns.FirstOrDefaultAsync(m => m.HymnID == id);
-            if (hymn == null)
+            Hymn = await _context.Hymns
+                .Include(s => s.Selections)
+                .ThenInclude(e => e.Meeting)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.HymnID == id);
+
+            if (Hymn == null)
             {
                 return NotFound();
             }
-            else 
-            {
-                Hymn = hymn;
-            }
+            //else 
+            //{
+            //    Hymn = hymn;
+            //}
             return Page();
         }
     }

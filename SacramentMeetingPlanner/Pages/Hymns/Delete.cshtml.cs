@@ -14,50 +14,72 @@ namespace SacramentMeetingPlanner.Pages.Hymns
     {
         private readonly SacramentMeetingPlanner.Data.ChurchContext _context;
 
-        public DeleteModel(SacramentMeetingPlanner.Data.ChurchContext context)
+        private readonly ILogger<DeleteModel> _logger;
+
+        public DeleteModel(SacramentMeetingPlanner.Data.ChurchContext context,
+                           ILogger<DeleteModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [BindProperty]
-      public Hymn Hymn { get; set; }
+        public Hymn Hymn { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
-            if (id == null || _context.Hymns == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var hymn = await _context.Hymns.FirstOrDefaultAsync(m => m.HymnID == id);
+            Hymn = await _context.Hymns
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.HymnID == id);
 
-            if (hymn == null)
+            if (Hymn == null)
             {
                 return NotFound();
             }
-            else 
+
+            if (saveChangesError.GetValueOrDefault())
             {
-                Hymn = hymn;
+                ErrorMessage = String.Format("Delete {ID} failed. Try again", id);
             }
+
             return Page();
         }
+    
+
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Hymns == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var hymn = await _context.Hymns.FindAsync(id);
 
-            if (hymn != null)
+            var student = await _context.Hymns.FindAsync(id);
+
+            if (student == null)
             {
-                Hymn = hymn;
-                _context.Hymns.Remove(Hymn);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, ErrorMessage);
+
+                return RedirectToAction("./Delete",
+                                     new { id, saveChangesError = true });
+            }
         }
     }
 }
