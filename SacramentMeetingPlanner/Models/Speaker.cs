@@ -4,7 +4,7 @@ namespace SacramentMeetingPlanner.Models
 {
     public class Speaker
     {
-        public int SpeakerID { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Enter the first and last name")]
         [RegularExpression(@"^([A-Z][a-z]+\s[A-Z][a-z]+)$", ErrorMessage = "First and last name must be capitalized and only contain letters.")]
@@ -15,6 +15,7 @@ namespace SacramentMeetingPlanner.Models
         public string Topic { get; set; }
 
         public ICollection<Assignments> Assignments { get; set; }
+        public ICollection<Meeting> Meetings { get; set; }
     }
 }
 

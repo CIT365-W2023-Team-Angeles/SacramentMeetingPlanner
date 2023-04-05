@@ -30,7 +30,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
                 return NotFound();
             }
 
-            var speaker =  await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
+            var speaker =  await _context.Speakers.FirstOrDefaultAsync(m => m.ID == id);
             if (speaker == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SpeakerExists(Speaker.SpeakerID))
+                if (!SpeakerExists(Speaker.ID))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
 
         private bool SpeakerExists(int id)
         {
-          return _context.Speakers.Any(e => e.SpeakerID == id);
+          return _context.Speakers.Any(e => e.ID == id);
         }
     }
 }

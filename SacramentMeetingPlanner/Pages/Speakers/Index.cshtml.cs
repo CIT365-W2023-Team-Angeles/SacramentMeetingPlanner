@@ -26,8 +26,32 @@ namespace SacramentMeetingPlanner.Pages.Speakers
 
         public IList<Speaker> Speaker { get; set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public SpeakerIndexData SpeakerData { get; set; }
+        public int SpeakerID { get; set; }
+        public int MeetingID { get; set; }
+
+        public async Task OnGetAsync(string sortOrder, string searchString, int? id, int? meetingID)
         {
+            SpeakerData = new SpeakerIndexData();
+            //SpeakerData.Speakers = await _context.Speakers
+            //    .Include(i => i.Topic).OrderBy(i => i.Name).ToListAsync();
+
+            if (id != null )
+            {
+                SpeakerID = id.Value;
+                Speaker speaker = SpeakerData.Speakers.Where(i => i.ID == id.Value).Single();
+                SpeakerData.Meetings = speaker.Meetings;
+            }
+
+            if (meetingID != null )
+            {
+                MeetingID = meetingID.Value;
+                IEnumerable<Assignments> Assignments = await _context.Assignments
+                    .Where(x => x.MeetingID == meetingID.Value)
+                    .Include(i => i.Speaker).ToListAsync();
+                SpeakerData.Assignments = Assignments;
+            }
+
             // using System;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TopicSort = String.IsNullOrEmpty(sortOrder) ? "topic_desc" : "";
