@@ -38,10 +38,7 @@ namespace SacramentMeetingPlanner.Pages.Hymns
             {
                 return NotFound();
             }
-            //else 
-            //{
-            //    Hymn = hymn;
-            //}
+
             return Page();
         }
     }
