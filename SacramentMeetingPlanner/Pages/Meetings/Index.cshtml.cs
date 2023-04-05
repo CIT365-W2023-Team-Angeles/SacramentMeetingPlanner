@@ -25,10 +25,13 @@ namespace SacramentMeetingPlanner.Pages.Meetings
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<Meeting> Meeting { get;set; } = default!;
+        public IList<Meeting> Meetings { get;set; }
 
         public async Task OnGetAsync(string sortOrder, string searchString)
         {
+
+            Meetings = await _context.Meetings.Include(c => c.Assignments).AsNoTracking().ToListAsync();
+
             // using System;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
@@ -59,7 +62,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                     break;
             }
 
-            Meeting = await meetingsIQ.AsNoTracking().ToListAsync();
+            Meetings = await meetingsIQ.AsNoTracking().ToListAsync();
         }
     }
 }

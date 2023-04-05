@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SacramentMeetingPlanner.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace SacramentMeetingPlanner.Migrations
                 {
                     HymnID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -32,7 +32,7 @@ namespace SacramentMeetingPlanner.Migrations
                     MeetingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MeetingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Conducting = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Conducting = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OpeningHymn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Invocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SacramentHymn = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -47,7 +47,21 @@ namespace SacramentMeetingPlanner.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Selections",
+                name: "Speakers",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Speakers", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Selection",
                 columns: table => new
                 {
                     SelectionID = table.Column<int>(type: "int", nullable: false)
@@ -57,39 +71,19 @@ namespace SacramentMeetingPlanner.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Selections", x => x.SelectionID);
+                    table.PrimaryKey("PK_Selection", x => x.SelectionID);
                     table.ForeignKey(
-                        name: "FK_Selections_Hymns_HymnID",
+                        name: "FK_Selection_Hymns_HymnID",
                         column: x => x.HymnID,
                         principalTable: "Hymns",
                         principalColumn: "HymnID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Selections_Meetings_MeetingID",
+                        name: "FK_Selection_Meetings_MeetingID",
                         column: x => x.MeetingID,
                         principalTable: "Meetings",
                         principalColumn: "MeetingID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Speakers",
-                columns: table => new
-                {
-                    SpeakerID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MeetingID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Speakers", x => x.SpeakerID);
-                    table.ForeignKey(
-                        name: "FK_Speakers_Meetings_MeetingID",
-                        column: x => x.MeetingID,
-                        principalTable: "Meetings",
-                        principalColumn: "MeetingID");
                 });
 
             migrationBuilder.CreateTable(
@@ -114,7 +108,7 @@ namespace SacramentMeetingPlanner.Migrations
                         name: "FK_Assignments_Speakers_SpeakerID",
                         column: x => x.SpeakerID,
                         principalTable: "Speakers",
-                        principalColumn: "SpeakerID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -129,18 +123,13 @@ namespace SacramentMeetingPlanner.Migrations
                 column: "SpeakerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Selections_HymnID",
-                table: "Selections",
+                name: "IX_Selection_HymnID",
+                table: "Selection",
                 column: "HymnID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Selections_MeetingID",
-                table: "Selections",
-                column: "MeetingID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Speakers_MeetingID",
-                table: "Speakers",
+                name: "IX_Selection_MeetingID",
+                table: "Selection",
                 column: "MeetingID");
         }
 
@@ -151,7 +140,7 @@ namespace SacramentMeetingPlanner.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
-                name: "Selections");
+                name: "Selection");
 
             migrationBuilder.DropTable(
                 name: "Speakers");

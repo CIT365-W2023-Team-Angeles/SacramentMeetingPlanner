@@ -136,14 +136,11 @@ namespace SacramentMeetingPlanner.Migrations
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
                 {
-                    b.Property<int>("SpeakerID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpeakerID"));
-
-                    b.Property<int?>("MeetingID")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -153,9 +150,7 @@ namespace SacramentMeetingPlanner.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SpeakerID");
-
-                    b.HasIndex("MeetingID");
+                    b.HasKey("ID");
 
                     b.ToTable("Speakers", (string)null);
                 });
@@ -188,7 +183,7 @@ namespace SacramentMeetingPlanner.Migrations
                         .IsRequired();
 
                     b.HasOne("SacramentMeetingPlanner.Models.Meeting", "Meeting")
-                        .WithMany("Selection")
+                        .WithMany()
                         .HasForeignKey("MeetingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -196,13 +191,6 @@ namespace SacramentMeetingPlanner.Migrations
                     b.Navigation("Hymn");
 
                     b.Navigation("Meeting");
-                });
-
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
-                {
-                    b.HasOne("SacramentMeetingPlanner.Models.Meeting", null)
-                        .WithMany("Speakers")
-                        .HasForeignKey("MeetingID");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Hymn", b =>
@@ -213,10 +201,6 @@ namespace SacramentMeetingPlanner.Migrations
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Meeting", b =>
                 {
                     b.Navigation("Assignments");
-
-                    b.Navigation("Selection");
-
-                    b.Navigation("Speakers");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>

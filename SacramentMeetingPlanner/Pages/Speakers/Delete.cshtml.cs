@@ -29,7 +29,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
                 return NotFound();
             }
 
-            var speaker = await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerID == id);
+            var speaker = await _context.Speakers.FirstOrDefaultAsync(m => m.ID == id);
 
             if (speaker == null)
             {

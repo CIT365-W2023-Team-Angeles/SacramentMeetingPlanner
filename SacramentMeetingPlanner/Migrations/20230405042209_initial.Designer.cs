@@ -12,8 +12,8 @@ using SacramentMeetingPlanner.Data;
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(ChurchContext))]
-    [Migration("20230404032517_droppedSelection")]
-    partial class droppedSelection
+    [Migration("20230405042209_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,7 @@ namespace SacramentMeetingPlanner.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("HymnID");
@@ -84,6 +85,7 @@ namespace SacramentMeetingPlanner.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Conducting")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Invocation")
@@ -137,24 +139,21 @@ namespace SacramentMeetingPlanner.Migrations
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
                 {
-                    b.Property<int>("SpeakerID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpeakerID"));
-
-                    b.Property<int?>("MeetingID")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Topic")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SpeakerID");
-
-                    b.HasIndex("MeetingID");
+                    b.HasKey("ID");
 
                     b.ToTable("Speakers", (string)null);
                 });
@@ -187,7 +186,7 @@ namespace SacramentMeetingPlanner.Migrations
                         .IsRequired();
 
                     b.HasOne("SacramentMeetingPlanner.Models.Meeting", "Meeting")
-                        .WithMany("Selection")
+                        .WithMany()
                         .HasForeignKey("MeetingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -195,13 +194,6 @@ namespace SacramentMeetingPlanner.Migrations
                     b.Navigation("Hymn");
 
                     b.Navigation("Meeting");
-                });
-
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
-                {
-                    b.HasOne("SacramentMeetingPlanner.Models.Meeting", null)
-                        .WithMany("Speakers")
-                        .HasForeignKey("MeetingID");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Hymn", b =>
@@ -212,10 +204,6 @@ namespace SacramentMeetingPlanner.Migrations
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Meeting", b =>
                 {
                     b.Navigation("Assignments");
-
-                    b.Navigation("Selection");
-
-                    b.Navigation("Speakers");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>

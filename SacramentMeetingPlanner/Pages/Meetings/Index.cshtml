@@ -27,25 +27,25 @@
         <tr class="table-info">
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-                    @Html.DisplayNameFor(model => model.Meeting[0].MeetingDate)
+                    @Html.DisplayNameFor(model => model.Meetings[0].MeetingDate)
                 </a>
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                    @Html.DisplayNameFor(model => model.Meeting[0].Conducting)
+                    @Html.DisplayNameFor(model => model.Meetings[0].Conducting)
                 </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].Notes)
+                @Html.DisplayNameFor(model => model.Meetings[0].Notes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].NumSpeakers)
+                @Html.DisplayNameFor(model => model.Meetings[0].NumSpeakers)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Meeting) {
+@foreach (var item in Model.Meetings) {
         <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.MeetingDate)
@@ -57,6 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
+
                 @Html.DisplayFor(modelItem => item.NumSpeakers)
             </td>
             <td>
