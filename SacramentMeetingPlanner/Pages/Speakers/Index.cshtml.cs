@@ -40,7 +40,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             if (id != null )
             {
                 SpeakerID = id.Value;
-                Speaker speaker = SpeakerData.Speakers.Where(i => i.SpeakerID == id.Value).Single();
+                Speaker speaker = SpeakerData.Speakers.Where(i => i.ID == id.Value).Single();
                 SpeakerData.Meetings = speaker.Meetings;
             }
 

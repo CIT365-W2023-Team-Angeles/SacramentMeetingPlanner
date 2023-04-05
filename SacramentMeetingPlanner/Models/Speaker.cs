@@ -14,6 +14,8 @@ namespace SacramentMeetingPlanner.Models
         [RegularExpression(@"^([A-Z][a-z]+)$", ErrorMessage = "Topic must be capitalized and only contain letters.")]
         public string Topic { get; set; }
 
+
+        public Meeting Meeting { get; set; }
         public ICollection<Assignments> Assignments { get; set; }
         public ICollection<Meeting> Meetings { get; set; }
     }
