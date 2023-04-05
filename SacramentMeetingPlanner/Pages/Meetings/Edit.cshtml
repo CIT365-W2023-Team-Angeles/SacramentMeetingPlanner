@@ -101,6 +101,20 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
+<script type="text/javascript">
+    function GetDynamicTextBox(value) {
+        return ('<hr><label class="control-label">Name</label><input name="Name" id="Name"class="form-control" required><br><label class="control-label">Topic</label><input name="Topic" id="Topic" class="form-control" required><br><button type="button" class="btn btn-sm btn-danger" onclick="RemoveTextBox(this); document.getElementById(\'addspeaker\').disabled=false;"><i class="fa fa-angle-right"></i> Remove Speaker</button>');
+    }
+    function AddTextBox() {
+        var div = document.createElement('DIV');
+        div.innerHTML = GetDynamicTextBox("");
+        document.getElementById("divcontent").appendChild(div);
+    }
+    function RemoveTextBox(div) {
+        document.getElementById("divcontent").removeChild(div.parentNode);
+    }
+</script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
