@@ -12,6 +12,7 @@ namespace SacramentMeetingPlanner.Models
         [DataType(DataType.Date), Display(Name = "Meeting Date"),DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MeetingDate { get; set; }
 
+        [Required(ErrorMessage = "Select a member of the bishopric.")]
         public string Conducting { get; set; }
 
         [Display(Name = "Opening Hymn")]
@@ -23,7 +24,7 @@ namespace SacramentMeetingPlanner.Models
         public string Invocation { get; set; }
 
         [Display(Name = "Sacrament Hymn")]
-        [Required(ErrorMessage = "Select a Hymn.")]
+        [Required(ErrorMessage = "Select a Hymn between 169 and 196.")]
         public string SacramentHymn { get; set; }
 
         [Display(Name = "Closing Hymn")]
