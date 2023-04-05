@@ -19,14 +19,47 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             _context = context;
         }
 
-        public IList<Speaker> Speaker { get;set; } = default!;
+        public string NameSort { get; set; }
+        public string TopicSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public IList<Speaker> Speaker { get; set; } = default!;
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            if (_context.Speakers != null)
+            // using System;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            TopicSort = String.IsNullOrEmpty(sortOrder) ? "topic_desc" : "";
+
+            CurrentFilter = searchString;
+
+            IQueryable<Speaker> speakersIQ = from s in _context.Speakers
+                                             select s;
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                Speaker = await _context.Speakers.ToListAsync();
+                speakersIQ = speakersIQ.Where(s => s.Name.Contains(searchString)
+                                       || s.Topic.Contains(searchString));
             }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    speakersIQ = speakersIQ.OrderByDescending(s => s.Name);
+                    break;
+                case "topic":
+                    speakersIQ = speakersIQ.OrderBy(s => s.Topic);
+                    break;
+                case "topic_desc":
+                    speakersIQ = speakersIQ.OrderByDescending(s => s.Topic);
+                    break;
+                default:
+                    speakersIQ = speakersIQ.OrderBy(s => s.Name);
+                    break;
+            }
+
+            Speaker = await speakersIQ.AsNoTracking().ToListAsync();
         }
     }
 }

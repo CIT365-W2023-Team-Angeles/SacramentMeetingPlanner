@@ -2,28 +2,45 @@
 @model SacramentMeetingPlanner.Pages.Speakers.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Speakers";
 }
 
-<h1>Index</h1>
+<h1>Speakers</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Assign New Speaker</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table table-hover">
     <thead>
         <tr class="table-info">
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Speaker[0].Name)
+                </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TopicSort">
                 @Html.DisplayNameFor(model => model.Speaker[0].Topic)
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Speaker) {
+        @foreach (var item in Model.Speaker) 
+        {
             <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -36,7 +53,7 @@
                 <a asp-page="./Details" asp-route-id="@item.SpeakerID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.SpeakerID">Delete</a>
             </td>
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>
