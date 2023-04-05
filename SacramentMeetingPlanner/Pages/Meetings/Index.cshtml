@@ -10,7 +10,6 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table table-hover">
 
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
@@ -23,7 +22,7 @@
         </div>
 </form>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr class="table-info">
             <th>
@@ -35,21 +34,6 @@
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                     @Html.DisplayNameFor(model => model.Meeting[0].Conducting)
                 </a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].OpeningHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].Invocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].SacramentHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].ClosingHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meeting[0].Benediction)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Meeting[0].Notes)
@@ -68,21 +52,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Conducting)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpeningHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Invocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SacramentHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClosingHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Benediction)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)

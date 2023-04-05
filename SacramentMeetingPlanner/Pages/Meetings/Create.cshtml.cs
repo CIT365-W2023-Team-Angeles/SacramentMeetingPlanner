@@ -39,6 +39,7 @@ namespace SacramentMeetingPlanner.Pages.Meetings
                 List<string> l = new List<string> { "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
                 SetConductingList(l.Select(x => new SelectListItem { Text = x, Value = x }).ToList());
             }
+
             HymnList = _context.Hymns.Select(a => new SelectListItem
             {
                 Value = a.DisplayName,
@@ -50,22 +51,17 @@ namespace SacramentMeetingPlanner.Pages.Meetings
 
         [BindProperty]
         public Meeting Meeting { get; set; }
-        public Meeting emptyMeeting { get; set; }
         public List<SelectListItem> ConductingList { get; set; }
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
+            var emptyMeeting = new Meeting();
             if (await TryUpdateModelAsync<Meeting>(
                 emptyMeeting,
                 "meeting",   // Prefix for form value.
-                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes))
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s => s.NumSpeakers))
             {
                 _context.Meetings.Add(emptyMeeting);
                 await _context.SaveChangesAsync();

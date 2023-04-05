@@ -69,33 +69,36 @@ namespace SacramentMeetingPlanner.Pages.Meetings
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            var meetingToUpdate = await _context.Meetings.FindAsync(id);
+
+
+            if (await TryUpdateModelAsync<Meeting>(
+                meetingToUpdate,
+                "meeting",
+                s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s=> s.Assignments))
             {
-                return Page();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Index");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+
+                    if (!MeetingExists(Meeting.MeetingID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
 
-            //if (await TryUpdateModelAsync<Meeting>(
-            //    meetingToUpdate,
-            //    "meeting",
-            //    s => s.MeetingID, s => s.MeetingDate, s => s.Conducting, s => s.OpeningHymn, s => s.Invocation, s => s.SacramentHymn, s => s.ClosingHymn, s => s.Benediction, s => s.Notes, s=> s.Assignments))
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch DbUpdateConcurrencyException
-            //{
-            //    if (!MeetingExists(Meeting.MeetingID))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool MeetingExists(int id)
