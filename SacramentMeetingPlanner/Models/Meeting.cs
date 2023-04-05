@@ -8,10 +8,8 @@ namespace SacramentMeetingPlanner.Models
     {
         public int MeetingID { get; set; }
 
-        [Display(Name = "Meeting Date")]
         [Required(ErrorMessage = "Enter a Date")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), Display(Name = "Meeting Date"),DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MeetingDate { get; set; }
 
         public string Conducting { get; set; }
