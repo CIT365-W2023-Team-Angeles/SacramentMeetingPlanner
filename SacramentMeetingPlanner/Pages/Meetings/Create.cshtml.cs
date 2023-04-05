@@ -19,13 +19,25 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
+        private List<SelectListItem> conductingList;
+
+        public List<SelectListItem> GetConductingList()
+        {
+            return conductingList;
+        }
+
+        public void SetConductingList(List<SelectListItem> value)
+        {
+            conductingList = value;
+        }
+
         public List<SelectListItem> HymnList { get; set; }
 
         public IActionResult OnGet()
         {
             {
-                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
-                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+                List<string> l = new List<string> { "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
+                SetConductingList(l.Select(x => new SelectListItem { Text = x, Value = x }).ToList());
             }
             HymnList = _context.Hymns.Select(a => new SelectListItem
             {

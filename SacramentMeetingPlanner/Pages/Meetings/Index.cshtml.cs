@@ -34,13 +34,13 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
 
             IQueryable<Meeting> meetingsIQ = from s in _context.Meetings
-            select s;
+                                             select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 //meetingsIQ = meetingsIQ.Where(s => s.MeetingDate.Contains(searchString)
                 //                       || s.Conducting.Contains(searchString));
-                meetingsIQ = meetingsIQ.Where(s => s.Conducting.Contains(searchString));
+                meetingsIQ = meetingsIQ.Where(s => s.Conducting.Contains(searchString) || s.Notes.Contains(searchString)); 
             }
 
             switch (sortOrder)

@@ -21,7 +21,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.Conducting" class="control-label"></label>
-                <input asp-for="Meeting.Conducting" class="form-control" />
+                <select asp-for="Meeting.Conducting" asp-items="@Model.GetConductingList()">
+                    <option>Select one</option>
+                </select>
                 <span asp-validation-for="Meeting.Conducting" class="text-danger"></span>
             </div>
             <div class="form-group">

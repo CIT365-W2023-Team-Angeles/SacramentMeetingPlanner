@@ -20,6 +20,19 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             _context = context;
         }
 
+        private List<SelectListItem> conductingList;
+
+        public List<SelectListItem> GetConductingList()
+        {
+            return conductingList;
+        }
+
+        public void SetConductingList(List<SelectListItem> value)
+        {
+            conductingList = value;
+        }
+
+
         [BindProperty]
         public Meeting Meeting { get; set; } = default!;
         public List<SelectListItem> HymnList { get; set; }
@@ -39,8 +52,8 @@ namespace SacramentMeetingPlanner.Pages.Meetings
             }
 
             {
-                List<string> l = new List<string> { "", "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
-                ConductingList = l.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+                List<string> l = new List<string> { "Bishop Clifford Duke", "Ethan Arredondo, 1st Counselor", "Jim Elliott, 2nd Counselor" };
+                SetConductingList(l.Select(x => new SelectListItem { Text = x, Value = x }).ToList());
             }
 
             Meeting = meeting;

@@ -38,6 +38,7 @@ namespace SacramentMeetingPlanner.Models
 
         public string Notes { get; set; }
 
+        [Display(Name = "Number of Speakers")]
         public int NumSpeakers { get; set; }
         public ICollection<Speaker> Speakers { get; set; }
 
