@@ -27,6 +27,21 @@ namespace SacramentMeetingPlanner.Models
         [Required(ErrorMessage = "Select a Hymn between 169 and 196.")]
         public string SacramentHymn { get; set; }
 
+        [Display(Name = "Speaker")]
+        [Required(ErrorMessage = "Enter the first and last name")]
+        [RegularExpression(@"^([A-Z][a-z]+\s[A-Z][a-z]+)$", ErrorMessage = "First and last name must be capitalized and only contain letters.")]
+        public string Speaker1 { get; set; }
+
+        [Display(Name = "Speaker")]
+        [Required(ErrorMessage = "Enter the first and last name")]
+        [RegularExpression(@"^([A-Z][a-z]+\s[A-Z][a-z]+)$", ErrorMessage = "First and last name must be capitalized and only contain letters.")]
+        public string Speaker2 { get; set; }
+
+        [Display(Name = "Speaker")]
+        [Required(ErrorMessage = "Enter the first and last name")]
+        [RegularExpression(@"^([A-Z][a-z]+\s[A-Z][a-z]+)$", ErrorMessage = "First and last name must be capitalized and only contain letters.")]
+        public string Speaker3 { get; set; }
+
         [Display(Name = "Closing Hymn")]
         [Required(ErrorMessage = "Select a Hymn.")]
         public string ClosingHymn { get; set; }
